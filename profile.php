@@ -1,5 +1,9 @@
 <?php
     session_start();
+
+    if (!$_SESSION['user']) {
+        header('Location: index.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +15,7 @@
 </head>
 <body>
 
-    <form>
+    <form action="vendor/send_form.php" method="post">
         <p>Привет, <?= $_SESSION['user']['full_name'] ?></p>
 
         <input type="text" name="random" placeholder="Введите текст">
@@ -31,13 +35,15 @@
         <p><input type="checkbox" name="e" value="e"> вариант e</p>
 
         <select>
-            <option>Вариант f</option>
-            <option>Вариант g</option>
+            <option name="f">Вариант f</option>
+            <option name="g">Вариант g</option>
         </select>
 
         <p></p>
         <button type="submit">Отправить</button>
         <input type="reset">
+        <a href="vendor/logout.php" class="logout">Выход</a>
+
     </form>
 
 </body>
